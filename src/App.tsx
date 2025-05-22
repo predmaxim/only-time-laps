@@ -1,8 +1,14 @@
 import React from 'react';
-import './styles/index.scss';
+import '@styles/index.scss';
+import TimeSegmentsBlock from '@components/TimeSegmentsBlock';
+import {demo} from '@/mocks';
 
 const App: React.FC = () => {
-  return <h1>Time Laps Only</h1>;
+  return (
+    <div>
+      <TimeSegmentsBlock segments={demo} />
+    </div>
+  );
 };
 
 export default App;
