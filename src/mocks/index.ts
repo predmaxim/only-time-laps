@@ -1,4 +1,4 @@
-import {TimeSegment} from '@components/TimeSegmentsBlock';
+import {TimeSegment} from '@/types';
 
 export const demo: TimeSegment[] = [
   {
