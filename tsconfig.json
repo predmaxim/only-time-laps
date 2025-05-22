@@ -9,7 +9,14 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@public/*": ["public/*"],
+      "@styles/*": ["src/styles/*"]
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
