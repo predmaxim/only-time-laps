@@ -15,8 +15,8 @@ React-приложение на TypeScript.
 
 ## Сборка проекта
 
-Для сборки production-режиме: `npm run build`
-Для запуска в production-режиме: `npm start`
+Для сборки production-версии: `npm run build`
+Для запуска production-версии: `npm start`
 
 ## Прочее
 
