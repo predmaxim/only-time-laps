@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
-import styles from './TimeSegmentsBlock.module.scss';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import gsap from 'gsap';
-import {TimeSegment} from '@/types';
+import React, { useState } from "react";
+import "./TimeSegmentsBlock.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import gsap from "gsap";
+import { TimeSegmentType } from "@/types";
 
 interface TimeSegmentsBlockProps {
-  segments: TimeSegment[];
+  segments: TimeSegmentType[];
 }
 
 const RADIUS = 120;
 const CENTER = 150;
 
-const Index: React.FC<TimeSegmentsBlockProps> = ({ segments }) => {
+const TimeSegmentsBlock = ({ segments }: TimeSegmentsBlockProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Расчет координат точек на окружности
   const getCirclePoints = (count: number, radius: number) => {
     const angleStep = (2 * Math.PI) / count;
     return Array.from({ length: count }, (_, i) => {
@@ -29,20 +28,18 @@ const Index: React.FC<TimeSegmentsBlockProps> = ({ segments }) => {
 
   const points = getCirclePoints(segments.length, RADIUS);
 
-  // Анимация смены слайдера
   const onSegmentChange = (i: number) => {
     if (i === activeIndex) return;
     gsap.fromTo(
       `#slider-${i}`,
       { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
+      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
     );
     setActiveIndex(i);
   };
-
   return (
-    <div className={styles.timeSegmentsBlock}>
-      <div className={styles.circleNav}>
+    <div className="timeSegmentsBlock">
+      <div className="circleNav">
         <svg width={CENTER * 2} height={CENTER * 2}>
           <g transform={`translate(${CENTER},${CENTER})`}>
             {/* Линии между точками */}
@@ -53,7 +50,7 @@ const Index: React.FC<TimeSegmentsBlockProps> = ({ segments }) => {
                 y1={0}
                 x2={pt.x}
                 y2={pt.y}
-                className={styles.line}
+                className="line"
               />
             ))}
             {/* Точки */}
@@ -63,37 +60,33 @@ const Index: React.FC<TimeSegmentsBlockProps> = ({ segments }) => {
                 cx={pt.x}
                 cy={pt.y}
                 r={16}
-                className={
-                  i === activeIndex ? styles.activeDot : styles.dot
-                }
+                className={i === activeIndex ? "activeDot" : "dot"}
                 onClick={() => onSegmentChange(i)}
-                style={{ cursor: 'pointer' }}
+                style={{ cursor: "pointer" }}
               />
             ))}
           </g>
         </svg>
         {/* Числа и подписи */}
-        <div className={styles.labels}>
+        <div className="labels">
           {points.map((pt, i) => (
             <div
               key={i}
-              className={
-                i === activeIndex ? styles.activeLabel : styles.label
-              }
+              className={i === activeIndex ? "activeLabel" : "label"}
               style={{
                 left: CENTER + pt.x - 28,
                 top: CENTER + pt.y - 28,
               }}
               onClick={() => onSegmentChange(i)}
             >
-              <div className={styles.value}>{segments[i].value}</div>
-              <div className={styles.segmentLabel}>{segments[i].label}</div>
+              <div className="value">{segments[i].value}</div>
+              <div className="segmentLabel">{segments[i].label}</div>
             </div>
           ))}
         </div>
       </div>
       {/* Слайдер событий для активного сегмента */}
-      <div className={styles.sliderWrapper}>
+      <div className="sliderWrapper">
         <div id={`slider-${activeIndex}`}>
           <Swiper
             spaceBetween={24}
@@ -104,9 +97,9 @@ const Index: React.FC<TimeSegmentsBlockProps> = ({ segments }) => {
           >
             {segments[activeIndex].events.map((event) => (
               <SwiperSlide key={event.id}>
-                <div className={styles.eventCard}>
-                  <div className={styles.eventTitle}>{event.title}</div>
-                  <div className={styles.eventDesc}>{event.description}</div>
+                <div className="eventCard">
+                  <div className="eventTitle">{event.title}</div>
+                  <div className="eventDesc">{event.description}</div>
                 </div>
               </SwiperSlide>
             ))}
@@ -117,4 +110,4 @@ const Index: React.FC<TimeSegmentsBlockProps> = ({ segments }) => {
   );
 };
 
-export default Index;
+export default TimeSegmentsBlock;

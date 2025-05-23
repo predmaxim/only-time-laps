@@ -1,7 +1,6 @@
-import React from 'react';
-import '@styles/index.scss';
-import TimeSegmentsBlock from '@components/TimeSegmentsBlock';
-import {demo} from '@/mocks';
+import React from "react";
+import TimeSegmentsBlock from "@components/TimeSegmentsBlock";
+import { demo } from "@/mocks";
 
 const App: React.FC = () => {
   return (

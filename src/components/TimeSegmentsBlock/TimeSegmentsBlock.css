@@ -1,10 +1,11 @@
+/* Временный CSS файл без модулей для отладки */
 .timeSegmentsBlock {
   position: relative;
   width: 420px;
   margin: 40px auto;
   background: #fff;
   border-radius: 32px;
-  box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
   padding: 40px 0 32px 0;
   display: flex;
   flex-direction: column;
@@ -27,7 +28,8 @@
   pointer-events: none;
 }
 
-.label, .activeLabel {
+.label,
+.activeLabel {
   position: absolute;
   width: 56px;
   text-align: center;
@@ -63,7 +65,8 @@
   stroke-width: 2;
 }
 
-.dot, .activeDot {
+.dot,
+.activeDot {
   transition: fill 0.2s, stroke 0.2s;
   stroke: #fff;
   stroke-width: 3;
@@ -86,30 +89,25 @@
   position: relative;
 }
 
-.sliderPlaceholder {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-}
-
 .eventCard {
   background: #f7f7f7;
   border-radius: 16px;
   padding: 20px 24px;
   min-width: 220px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  gap: 8px;
 }
 
 .eventTitle {
   font-size: 16px;
   font-weight: 600;
-  margin-bottom: 8px;
+  color: #1a1a1a;
 }
 
 .eventDesc {
   font-size: 14px;
   color: #666;
+  line-height: 1.4;
 }

@@ -4,7 +4,7 @@ export type Event = {
   description: string;
 };
 
-export type TimeSegment = {
+export type TimeSegmentType = {
   id: string;
   label: string;
   value: number;
