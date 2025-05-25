@@ -12,6 +12,7 @@ module.exports = (env, argv) => {
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: '[name].js',
+      clean: true,
     },
     resolve: {
       extensions: ['.tsx', '.ts', '.js'],
@@ -29,8 +30,17 @@ module.exports = (env, argv) => {
           use: 'babel-loader',
         },
         {
-          test: /\.css$/,
-          use: ['style-loader', 'css-loader'],
+          test: /\.(css|sass|scss)$/i,
+          use: [
+            'css-loader',
+            'postcss-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                // sassOptions: { outputStyle: 'compressed' },
+              },
+            },
+          ],
         },
         {
           test: /\.(png|jpe?g|gif|svg)$/,
@@ -56,7 +66,6 @@ module.exports = (env, argv) => {
             },
           ],
         },
-
       ],
     },
     plugins: [
@@ -67,7 +76,7 @@ module.exports = (env, argv) => {
         analyzerMode: 'static',
         openAnalyzer: false,
         reportFilename: 'report.html',
-      })
+      }),
     ],
     devServer: {
       static: {
@@ -78,6 +87,7 @@ module.exports = (env, argv) => {
       hot: true,
     },
     optimization: {
+      minimize: !isDevelopment,
       splitChunks: {
         chunks: 'all',
         cacheGroups: {
