@@ -15,7 +15,7 @@ body,
   display: flex;
   flex-direction: column;
   min-height: 700px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -41,7 +41,6 @@ body,
 }
 
 .stickyCircularNavArea {
-  position: -webkit-sticky;
   /* For Safari */
   position: sticky;
   top: 20px;
@@ -104,7 +103,7 @@ body,
 }
 
 .active-svg-segment-label {
-  font-family: 'PT sans', sans-serif;
+  font-family: "PT sans", sans-serif;
   font-size: 14px;
   font-weight: 600;
   fill: #5669FF;
@@ -114,7 +113,7 @@ body,
 }
 
 .event-count-label {
-  font-family: 'PT sans', sans-serif;
+  font-family: "PT sans", sans-serif;
   font-size: 12px;
   font-weight: 500;
   fill: #333;
@@ -139,7 +138,7 @@ body,
   pointer-events: auto;
   transition: color 0.3s, font-weight 0.3s, background-color 0.3s, padding 0.3s, border-radius 0.3s;
   user-select: none;
-  font-family: 'PT sans', sans-serif;
+  font-family: "PT sans", sans-serif;
   font-size: 14px;
   color: #777;
   font-weight: 500;
@@ -225,7 +224,7 @@ body,
   font-size: 150px;
   font-weight: 700;
   line-height: 1;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   letter-spacing: -5px;
   display: inline-block;
 }
@@ -327,12 +326,12 @@ body,
 }
 
 .custom-swiper-button-prev {
-  left: 0px;
+  left: 0;
   /* Позиция левой кнопки */
 }
 
 .custom-swiper-button-next {
-  right: 0px;
+  right: 0;
   /* Позиция правой кнопки */
 }
 
@@ -355,7 +354,6 @@ body,
 }
 
 .stickyCircularNavArea {
-  position: -webkit-sticky;
   /* For Safari */
   position: sticky;
   top: 20px;
@@ -386,7 +384,7 @@ body,
 
 /* foreignObject для числа событий при наведении (горизонтально) */
 svg .event-count-fo div {
-  font-family: 'PT Sans', sans-serif;
+  font-family: "PT Sans", sans-serif;
   font-size: 13px;
   font-weight: 500;
   color: #333;
@@ -498,12 +496,12 @@ svg .event-count-fo div {
   }
 
   .custom-swiper-button-prev {
-    left: 0px;
+    left: 0;
     /* Можно оставить или скорректировать, если padding у sliderSection влияет */
   }
 
   .custom-swiper-button-next {
-    right: 0px;
+    right: 0;
     /* Можно оставить или скорректировать, если padding у sliderSection влияет */
   }
 
