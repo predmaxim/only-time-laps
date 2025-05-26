@@ -1,113 +1,513 @@
-/* Временный CSS файл без модулей для отладки */
+html,
+body,
+#root {
+  overflow: visible !important;
+}
+
 .timeSegmentsBlock {
   position: relative;
-  width: 420px;
+  width: 100%;
+  max-width: 1200px;
   margin: 40px auto;
-  background: #fff;
-  border-radius: 32px;
-  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
-  padding: 40px 0 32px 0;
+  background: #f4f7fa;
+  border-radius: 24px;
+  padding: 50px 60px;
+  display: flex;
+  flex-direction: column;
+  min-height: 700px;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.blockTitleWrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.decorativeLine {
+  width: 5px;
+  height: 70px;
+  background: linear-gradient(to bottom, #5669FF, #EF5DA8);
+  margin-right: 20px;
+  border-radius: 3px;
+}
+
+.blockTitle {
+  font-size: 48px;
+  font-weight: 700;
+  color: #333;
+  line-height: 1.2;
+}
+
+.stickyCircularNavArea {
+  position: -webkit-sticky;
+  /* For Safari */
+  position: sticky;
+  top: 20px;
+  /* Расстояние от верха viewport при "прилипании". Можете изменить на 0, если нужно прилепить к самому верху. */
+  z-index: 100;
+  /* Убедимся, что элемент выше других при прокрутке */
+  background: #f4f7fa;
+  /* Фон должен совпадать с фоном .timeSegmentsBlock или страницы, чтобы избежать "просвечивания" контента при прокрутке */
+  padding-top: 10px;
+  /* Небольшой отступ сверху внутри липкого блока */
+  padding-bottom: 20px;
+  /* Отступ снизу, чтобы элементы управления не прилипали к слайдеру событий */
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* Центрируем .circleNav и .circularNavControls внутри */
 }
 
 .circleNav {
   position: relative;
-  width: 300px;
-  height: 300px;
-  margin-bottom: 32px;
+  width: 380px;
+  height: 380px;
+  margin: 20px auto 40px auto;
+  align-self: center;
+}
+
+.circleNav svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.line {
+  stroke: #e0e6ed;
+  stroke-width: 1;
+  opacity: 0.5;
+}
+
+.dot,
+.activeDot {
+  transition: fill 0.3s, stroke 0.3s, r 0.3s;
+  stroke: none;
+}
+
+.dot {
+  fill: #d1d8e0;
+  cursor: pointer;
+  r: 6px;
+}
+
+.dot:hover {
+  fill: #adb5bd;
+}
+
+.activeDot {
+  fill: #5669FF;
+  r: 8px;
+  cursor: pointer;
+}
+
+.active-svg-segment-label {
+  font-family: 'PT sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  fill: #5669FF;
+  /* Цвет текста как у активной точки */
+  pointer-events: none;
+  /* Чтобы не мешала кликам по точкам */
+}
+
+.event-count-label {
+  font-family: 'PT sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  fill: #333;
+  /* Цвет для счетчика событий */
+  pointer-events: none;
 }
 
 .labels {
   position: absolute;
   top: 0;
   left: 0;
-  width: 300px;
-  height: 300px;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
 }
 
 .label,
 .activeLabel {
   position: absolute;
-  width: 56px;
+  transform: translate(-50%, -50%);
   text-align: center;
   pointer-events: auto;
-  transition: color 0.2s;
+  transition: color 0.3s, font-weight 0.3s, background-color 0.3s, padding 0.3s, border-radius 0.3s;
   user-select: none;
+  font-family: 'PT sans', sans-serif;
+  font-size: 14px;
+  color: #777;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background-color: transparent;
+  white-space: nowrap;
 }
 
-.label {
-  color: #b0b0b0;
-  font-weight: 500;
+.label:hover {
+  color: #333;
 }
 
 .activeLabel {
-  color: #1a1a1a;
-  font-weight: 700;
+  color: #5669FF;
+  font-weight: 600;
+  background-color: #e9efff;
+  padding: 6px 12px;
+  border-radius: 16px;
 }
 
-.value {
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 2px;
+/* Стили для управления круговым слайдером */
+.circularNavControls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  /* Отступ от круга */
+  margin-bottom: 30px;
+  /* Отступ до слайдера событий */
 }
+
+.circularNavPagination {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.circularNavButtons {
+  display: flex;
+  gap: 15px;
+}
+
+.circular-nav-button {
+  background-color: #fff;
+  border: 1px solid #d1d8e0;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #5669FF;
+  font-size: 20px;
+  font-weight: bold;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.circular-nav-button:hover {
+  background-color: #f0f4ff;
+  border-color: #adb5bd;
+}
+
+.centerValue {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: auto;
+  text-align: center;
+  pointer-events: none;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.value-main,
+.value-secondary {
+  font-size: 150px;
+  font-weight: 700;
+  line-height: 1;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -5px;
+  display: inline-block;
+}
+
+.value-main {
+  color: #5669FF;
+}
+
+.value-secondary {
+  color: #EF5DA8;
+  font-size: 130px;
+}
+
 
 .segmentLabel {
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.1;
+  display: none;
 }
 
-.line {
-  stroke: #e0e0e0;
-  stroke-width: 2;
-}
-
-.dot,
-.activeDot {
-  transition: fill 0.2s, stroke 0.2s;
-  stroke: #fff;
-  stroke-width: 3;
-}
-
-.dot {
-  fill: #e0e0e0;
-  cursor: pointer;
-}
-
-.activeDot {
-  fill: #1a1a1a;
-  cursor: pointer;
+/* Секция слайдера и его навигации */
+.sliderSection {
+  display: flex;
+  align-items: center;
+  /* Выравниваем кнопки и слайдер по центру вертикально */
+  margin-top: 30px;
+  /* Отступ сверху для всей секции */
+  position: relative;
+  /* Для позиционирования кнопок, если понадобится */
 }
 
 .sliderWrapper {
-  width: 340px;
-  min-height: 120px;
-  margin: 0 auto;
+  flex-grow: 1;
+  /* Слайдер занимает оставшееся пространство */
+  min-width: 0;
+  min-height: 180px;
+  margin: 0 40px;
   position: relative;
 }
 
 .eventCard {
-  background: #f7f7f7;
-  border-radius: 16px;
-  padding: 20px 24px;
-  min-width: 220px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  /* background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07); */
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-height: 150px;
+  box-sizing: border-box;
 }
 
-.eventTitle {
-  font-size: 16px;
+.eventCard .eventYear {
+  font-size: 20px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: #5669FF;
+  margin-bottom: 8px;
 }
 
-.eventDesc {
-  font-size: 14px;
-  color: #666;
-  line-height: 1.4;
+.eventCard .eventTitle {
+  display: none;
+}
+
+.eventCard .eventDesc {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Обновляем стили для кастомных кнопок навигации Swiper */
+.custom-swiper-button-prev,
+.custom-swiper-button-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px !important;
+  /* Небольшой размер, принудительно */
+  height: 36px !important;
+  /* Небольшой размер, принудительно */
+  background-color: #fff;
+  border: 1px solid #e0e6ed;
+  border-radius: 50%;
+  /* Круглая форма */
+  color: #5669FF;
+  display: flex !important;
+  /* Для корректного отображения содержимого */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, opacity 0.2s;
+  z-index: 10;
+  opacity: 1 !important;
+  /* Полностью видимы, когда активны, принудительно */
+}
+
+.custom-swiper-button-prev:hover,
+.custom-swiper-button-next:hover {
+  background-color: #f0f4ff;
+  border-color: #c0cfff;
+  /* opacity: 1; Ховер уже подразумевает видимость, если кнопка не disabled */
+}
+
+.custom-swiper-button-prev {
+  left: 0px;
+  /* Позиция левой кнопки */
+}
+
+.custom-swiper-button-next {
+  right: 0px;
+  /* Позиция правой кнопки */
+}
+
+/* Стили для неактивных кнопок Swiper */
+.custom-swiper-button-prev.swiper-button-disabled,
+.custom-swiper-button-next.swiper-button-disabled {
+  opacity: 0 !important;
+  /* Полностью скрыты, когда неактивны, принудительно */
+  cursor: default;
+  pointer-events: none;
+}
+
+.custom-swiper-button-prev::after,
+.custom-swiper-button-next::after {
+  font-size: 16px !important;
+  /* Уменьшенный размер иконок, принудительно */
+  font-weight: bold;
+  color: #5669FF !important;
+  /* Убедимся, что цвет иконки также переопределен */
+}
+
+.stickyCircularNavArea {
+  position: -webkit-sticky;
+  /* For Safari */
+  position: sticky;
+  top: 20px;
+  /* Расстояние от верха viewport при "прилипании". Можете изменить на 0, если нужно прилепить к самому верху. */
+  z-index: 100;
+  /* Убедимся, что элемент выше других при прокрутке */
+  background: #f4f7fa;
+  /* Фон должен совпадать с фоном .timeSegmentsBlock или страницы, чтобы избежать "просвечивания" контента при прокрутке */
+  padding-top: 10px;
+  /* Небольшой отступ сверху внутри липкого блока */
+  padding-bottom: 20px;
+  /* Отступ снизу, чтобы элементы управления не прилипали к слайдеру событий */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Центрируем .circleNav и .circularNavControls внутри */
+}
+
+.perimeter-circle {
+  stroke: #d1d8e0;
+  stroke-width: 2;
+  fill: none;
+}
+
+.event-count-label {
+  /* Оставляем для активной точки */
+}
+
+/* foreignObject для числа событий при наведении (горизонтально) */
+svg .event-count-fo div {
+  font-family: 'PT Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  border: 1px solid #e0e6ed;
+  width: 40px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+@media (max-width: 1200px) {
+  /* Убираем специфичные стили для стандартных кнопок, т.к. они скрыты */
+}
+
+@media (max-width: 900px) {
+  .timeSegmentsBlock {
+    padding: 40px 30px;
+  }
+
+  .blockTitle {
+    font-size: 36px;
+  }
+
+  .decorativeLine {
+    height: 50px;
+  }
+
+  .circleNav,
+  .labels {
+    width: 320px;
+    height: 320px;
+  }
+
+  .value-main,
+  .value-secondary {
+    font-size: 100px;
+    letter-spacing: -3px;
+  }
+
+  .value-secondary {
+    font-size: 90px;
+  }
+
+  .sliderSection {
+    flex-direction: column;
+    /* На малых экранах кнопки могут быть над слайдером */
+    align-items: stretch;
+    /* Растягиваем элементы по ширине */
+  }
+}
+
+@media (max-width: 600px) {
+  .timeSegmentsBlock {
+    padding: 30px 15px;
+    margin: 20px auto;
+  }
+
+  .blockTitleWrapper {
+    margin-bottom: 20px;
+  }
+
+  .blockTitle {
+    font-size: 28px;
+  }
+
+  .decorativeLine {
+    height: 40px;
+    margin-right: 15px;
+  }
+
+  .circleNav,
+  .labels {
+    width: 280px;
+    height: 280px;
+  }
+
+  .value-main,
+  .value-secondary {
+    font-size: 70px;
+    letter-spacing: -2px;
+  }
+
+  .value-secondary {
+    font-size: 60px;
+  }
+
+  .sliderSection {
+    padding: 0 15px;
+    /* Отступы для кнопок могут остаться, если кнопки выходят за пределы слайдера */
+  }
+
+  .custom-swiper-button-prev,
+  .custom-swiper-button-next {
+    width: 36px !important;
+    /* Подтверждаем небольшой размер на малых экранах */
+    height: 36px !important;
+    /* Подтверждаем небольшой размер на малых экранах */
+  }
+
+  .custom-swiper-button-prev::after,
+  .custom-swiper-button-next::after {
+    font-size: 16px !important;
+    /* Уменьшенный размер иконок */
+  }
+
+  .custom-swiper-button-prev {
+    left: 0px;
+    /* Можно оставить или скорректировать, если padding у sliderSection влияет */
+  }
+
+  .custom-swiper-button-next {
+    right: 0px;
+    /* Можно оставить или скорректировать, если padding у sliderSection влияет */
+  }
+
+  .sliderWrapper {
+    padding-bottom: 0;
+  }
 }
