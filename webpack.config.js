@@ -30,16 +30,29 @@ module.exports = (env, argv) => {
           use: 'babel-loader',
         },
         {
+          test: /\.module\.(scss|sass)$/i,
+          exclude: /node_modules/,
+          use: [
+            'style-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                modules: {
+                  localIdentName: isDevelopment ? '[name]__[local]--[hash:base64:5]' : '[hash:base64]',
+                },
+              },
+            },
+            'postcss-loader',
+            'sass-loader'
+          ],
+        },
+        {
           test: /\.(css|sass|scss)$/i,
+          exclude: /\.module\.(css|sass|scss)$/i,
           use: [
             'css-loader',
             'postcss-loader',
-            {
-              loader: 'sass-loader',
-              options: {
-                // sassOptions: { outputStyle: 'compressed' },
-              },
-            },
+            'sass-loader'
           ],
         },
         {
@@ -54,28 +67,11 @@ module.exports = (env, argv) => {
             },
           ],
         },
-        {
-          test: /\.(woff|woff2|eot|ttf|otf)$/,
-          use: [
-            {
-              loader: 'file-loader',
-              options: {
-                name: '[path][name].[ext]',
-                outputPath: 'fonts/',
-              },
-            },
-          ],
-        },
       ],
     },
     plugins: [
       new HtmlWebpackPlugin({
         template: 'public/index.html',
-      }),
-      new BundleAnalyzerPlugin({
-        analyzerMode: 'static',
-        openAnalyzer: false,
-        reportFilename: 'report.html',
       }),
     ],
     devServer: {

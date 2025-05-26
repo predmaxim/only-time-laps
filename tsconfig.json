@@ -26,6 +26,9 @@
       ]
     }
   },
+  "files": [
+    "src/global.d.ts"
+  ],
   "include": [
     "src/**/*"
   ],
